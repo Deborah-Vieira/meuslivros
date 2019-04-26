@@ -23,16 +23,14 @@ class BooksApp extends React.Component {
       this.setState({ books: livros }); //nome da minha array books aqui estou guardando nela os livros
     });
   }
-
+  //3 variaveis que passam a lista de livro para os componente respectivos
   render() {
     let LendoatualmenteLivros = this.state.books.filter(
       book => book.shelf === "currentlyReading"
     );
-    //  console.log(this.state.books);
+    let Ler = this.state.books.filter(book => book.shelf === "Read");
+    let QueroLer = this.state.books.filter(book => book.shelf === "WantToRead");
 
-    {
-      /* preciso criar aqui uma variável para que passe a lista de livros para cada componente */
-    }
     return (
       <div className="app">
         {this.state.showSearchPage ? (
@@ -45,14 +43,6 @@ class BooksApp extends React.Component {
                 Close
               </button>
               <div className="search-books-input-wrapper">
-                {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
                 <input type="text" placeholder="Search by title or author" />
               </div>
             </div>
@@ -61,27 +51,16 @@ class BooksApp extends React.Component {
             </div>
           </div>
         ) : (
-          //ESSA DIV RENDERIZA O TITULO DA PÁGINA
+          //ESSA DIV RENDERIZA O TITULO DA PÁGINA e na 63 passo as variaveis do filter para componentes
           <div className="list-books">
             <div className="list-books-title">
               <h1>Meuslivros</h1>
             </div>
-
             <div className="list-books-content">
               <div>
                 <ConteudoLivro books={LendoatualmenteLivros} />
-                {/* preciso passar para cada componente a lista de livros aquiRETIREI A SEGUNDA CLASSE bookshelf */}
-                <WantToRead
-                  books={this.state.books.filter(
-                    book => book.shelf === "currentlyReading"
-                  )}
-                />
-                {/* RETIREI A 3 CLASSE bookshelf */}
-                <Read
-                  books={this.state.books.filter(
-                    book => book.shelf === "currentlyReading"
-                  )}
-                />
+                <WantToRead books={QueroLer} />
+                <Read books={Ler} />
                 <div className="open-search">
                   <button
                     onClick={() => this.setState({ showSearchPage: true })}
