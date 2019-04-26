@@ -4,16 +4,15 @@ import BotaoEscolha from "../BotaoEscolha/botaoEscolha";
 //LENDO ATUALMENTE
 
 class ConteudoLivro extends Component {
-  //console.log(this.props.books);
-
   render() {
+    console.log(this.props.books);
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">Currently Reading</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
             {this.props.books.map(book => (
-              <li>
+              <li key={book.id}>
                 {" "}
                 <div className="book">
                   <div className="book-top">
@@ -32,6 +31,7 @@ class ConteudoLivro extends Component {
                   <div className="book-authors">Harper Lee</div>
                 </div>
               </li>
+            ))}
             <li>
               <div className="book">
                 <div className="book-top">
@@ -50,7 +50,6 @@ class ConteudoLivro extends Component {
                 <div className="book-authors">Orson Scott Card</div>
               </div>
             </li>
-            ))}
           </ol>
         </div>
       </div>

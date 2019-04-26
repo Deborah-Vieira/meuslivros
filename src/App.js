@@ -20,13 +20,15 @@ class BooksApp extends React.Component {
   componentDidMount() {
     //aqui puxo todos os dados da lista de livros da api, antes que a pagina carregue
     BooksAPI.getAll().then(livros => {
-      this.setState({ bookList: livros });
+      this.setState({ books: livros }); //nome da minha array books aqui estou guardando nela os livros
     });
   }
+
   render() {
     let LendoatualmenteLivros = this.state.books.filter(
       book => book.shelf === "currentlyReading"
     );
+    //  console.log(this.state.books);
 
     {
       /* preciso criar aqui uma variável para que passe a lista de livros para cada componente */
@@ -67,11 +69,7 @@ class BooksApp extends React.Component {
 
             <div className="list-books-content">
               <div>
-                <ConteudoLivro
-                  books={this.state.books.filter(
-                    book => book.shelf === "currentlyReading"
-                  )}
-                />
+                <ConteudoLivro books={LendoatualmenteLivros} />
                 {/* preciso passar para cada componente a lista de livros aquiRETIREI A SEGUNDA CLASSE bookshelf */}
                 <WantToRead
                   books={this.state.books.filter(
