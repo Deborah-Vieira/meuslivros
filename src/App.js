@@ -4,15 +4,20 @@ import ConteudoLivro from "./Lendoatualmente/ConteudoLivro";
 import WantToRead from "./QueroLer/WantToRead";
 import Read from "./Ler/Read";
 import App from "./App.css";
+import escapeRegExp from "escape-string-regexp";
+import sortBy from "sort-by";
 
 class BooksApp extends React.Component {
   constructor() {
     super();
     this.state = {
-      books: [], //UM ARRAY DE LIVROS
+      value: "",
+      books: [],
+      query: "", //UM ARRAY DE LIVROS
+      showSearchPage: [], //guarda a busca dos livros
       showSearchPage: false
     };
-    this.updateBook = this.updateBook.bind(this); //identificação de escopo, faz o this trabalhar no retorno de chamada
+    //this.updateBook = this.updateBook.bind(this); //identificação de escopo, faz o this trabalhar no retorno de chamada, uso isso caso nao use na minha função o ES6 de seta a arrow function (=>) a seta.
   }
 
   //aqui puxo todos os dados da lista de livros da api, antes que a pagina carregue
@@ -22,22 +27,35 @@ class BooksApp extends React.Component {
     });
   }
 
-  /*/método atualiza os livros nas prateleiras
+  /* /método atualiza os livros nas prateleiras
   updateBook(book, shelf) {
     BooksAPI.update().then(livros => {
       this.setState({});
     });
-  }
+  }*/
 
   //método busca
-  /*  searchBook(query) {
-    BooksAPI.query().then(query => {
-      this.setState({});
+  /* searchBook(query) {
+    BooksAPI.search(query).then(livros => {
+      this.setState({ booksSearch: livros });
+      //console.log("busca", livros);
     });
-  }*/
+}*/
+  updateQuery = query => {
+    this.setState({ query: query.trim() });
+  };
 
   //3 variaveis que passam a lista de livro para os componente respectivos
   render() {
+    //Buscando contatos segundo expressoes regulares
+    let MostraLivros;
+    if (this.state.query) {
+      const match = new RegExp(escapeRegExp(this.state.query), "i");
+      MostraLivros = this.props.livros.filter(livros => match.test(book.name));
+    } else {
+      MostraLivros = this.props.livros;
+    }
+
     //console.log(this.state.books); //acessando o estado do componente
     let LendoatualmenteLivros = this.state.books.filter(
       book => book.shelf === "currentlyReading"
@@ -45,6 +63,7 @@ class BooksApp extends React.Component {
     let Ler = this.state.books.filter(book => book.shelf === "read");
     let QueroLer = this.state.books.filter(book => book.shelf === "wantToRead");
     return (
+      //essa div é referente a página de busca , caso eu queira a componentizar
       <div className="app">
         {this.state.showSearchPage ? (
           <div className="search-books">
@@ -56,7 +75,12 @@ class BooksApp extends React.Component {
                 Close
               </button>
               <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search by title or author" />
+                <input
+                  type="text"
+                  placeholder="Search by title or author"
+                  value={this.setState.query}
+                  onChange={event => this.updateQuery(event.target.value)}
+                />
               </div>
             </div>
             <div className="search-books-results">
