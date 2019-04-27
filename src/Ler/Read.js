@@ -3,7 +3,7 @@ import BotaoEscolha from "../BotaoEscolha/botaoEscolha";
 
 class Read extends Component {
   render() {
-    console.log(this.props.books);
+    //console.log(this.props.books);
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">Read</h2>

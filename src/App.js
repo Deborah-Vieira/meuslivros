@@ -6,31 +6,44 @@ import Read from "./Ler/Read";
 import App from "./App.css";
 
 class BooksApp extends React.Component {
-  state = {
-    books: [], //UM ARRAY DE LIVROS
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false
-  };
+  constructor() {
+    super();
+    this.state = {
+      books: [], //UM ARRAY DE LIVROS
+      showSearchPage: false
+    };
+    this.updateBook = this.updateBook.bind(this); //identificação de escopo, faz o this trabalhar no retorno de chamada
+  }
 
+  //aqui puxo todos os dados da lista de livros da api, antes que a pagina carregue
   componentDidMount() {
-    //aqui puxo todos os dados da lista de livros da api, antes que a pagina carregue
     BooksAPI.getAll().then(livros => {
       this.setState({ books: livros }); //nome da minha array books aqui estou guardando nela os livros
     });
   }
+
+  /*/método atualiza os livros nas prateleiras
+  updateBook(book, shelf) {
+    BooksAPI.update().then(livros => {
+      this.setState({});
+    });
+  }
+
+  //método busca
+  /*  searchBook(query) {
+    BooksAPI.query().then(query => {
+      this.setState({});
+    });
+  }*/
+
   //3 variaveis que passam a lista de livro para os componente respectivos
   render() {
+    //console.log(this.state.books); //acessando o estado do componente
     let LendoatualmenteLivros = this.state.books.filter(
       book => book.shelf === "currentlyReading"
     );
-    let Ler = this.state.books.filter(book => book.shelf === "Read");
-    let QueroLer = this.state.books.filter(book => book.shelf === "WantToRead");
-
+    let Ler = this.state.books.filter(book => book.shelf === "read");
+    let QueroLer = this.state.books.filter(book => book.shelf === "wantToRead");
     return (
       <div className="app">
         {this.state.showSearchPage ? (
