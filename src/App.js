@@ -3,6 +3,8 @@ import * as BooksAPI from "./BooksAPI";
 import ConteudoLivro from "./Lendoatualmente/ConteudoLivro";
 import WantToRead from "./QueroLer/WantToRead";
 import Read from "./Ler/Read";
+import SearchBook from "./SearchBook";
+import { Link, Route } from "react-router-dom";
 import App from "./App.css";
 import escapeRegExp from "escape-string-regexp";
 import sortBy from "sort-by";
@@ -13,9 +15,8 @@ class BooksApp extends React.Component {
     this.state = {
       value: "",
       books: [],
-      query: "", //UM ARRAY DE LIVROS
-      showSearchPage: [], //guarda a busca dos livros
-      showSearchPage: false
+      query: "" //UM ARRAY DE LIVROS
+      // showSearchPage: [], //guarda a busca dos livros
     };
     //this.updateBook = this.updateBook.bind(this); //identificação de escopo, faz o this trabalhar no retorno de chamada, uso isso caso nao use na minha função o ES6 de seta a arrow function (=>) a seta.
   }
@@ -48,13 +49,15 @@ class BooksApp extends React.Component {
   //3 variaveis que passam a lista de livro para os componente respectivos
   render() {
     //Buscando contatos segundo expressoes regulares
-    let MostraLivros;
+    /*let MostraLivros;
     if (this.state.query) {
       const match = new RegExp(escapeRegExp(this.state.query), "i");
-      MostraLivros = this.props.livros.filter(livros => match.test(book.name));
+      MostraLivros = this.props.livros.filter(livros =>
+        match.test(livros.name)
+      );
     } else {
       MostraLivros = this.props.livros;
-    }
+    }*/
 
     //console.log(this.state.books); //acessando o estado do componente
     let LendoatualmenteLivros = this.state.books.filter(
@@ -65,53 +68,44 @@ class BooksApp extends React.Component {
     return (
       //essa div é referente a página de busca , caso eu queira a componentizar
       <div className="app">
-        {this.state.showSearchPage ? (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <button
-                className="close-search"
-                onClick={() => this.setState({ showSearchPage: false })}
-              >
-                Close
-              </button>
-              <div className="search-books-input-wrapper">
-                <input
-                  type="text"
-                  placeholder="Search by title or author"
-                  value={this.setState.query}
-                  onChange={event => this.updateQuery(event.target.value)}
-                />
+        <Route path="/search" Component={SearchBook} />
+        {/*ESSA DIV RENDERIZA O TITULO DA PÁGINA e na 63 passo as variaveis do filter para componentes*/}
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <div className="list-books">
+              <div className="list-books-title">
+                <h1>Meuslivros</h1>
               </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid" />
-            </div>
-          </div>
-        ) : (
-          //ESSA DIV RENDERIZA O TITULO DA PÁGINA e na 63 passo as variaveis do filter para componentes
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>Meuslivros</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                <ConteudoLivro books={LendoatualmenteLivros} />
-                <WantToRead books={QueroLer} />
-                <Read books={Ler} />
-                <div className="open-search">
-                  <button
-                    onClick={() => this.setState({ showSearchPage: true })}
-                  >
-                    Add a book
-                  </button>
+              <div className="list-books-content">
+                <div>
+                  <ConteudoLivro books={LendoatualmenteLivros} />
+                  <WantToRead books={QueroLer} />
+                  <Read books={Ler} />
+                  {/* add a rota por aqui */}
+                  {/* botão que vai para a página de busca */}
+                  <div className="open-search">
+                    <Link to="/search">Add a book</Link>
+                  </div>
                 </div>
               </div>
+              )}
             </div>
-          </div>
-        )}
+          )}
+        />
       </div>
     );
   }
 }
 
 export default BooksApp;
+//apenas para nao esquecer como estava antes
+/* 
+<link to="/search">
+  Add a book onClick= {() => this.setState({ showSearchPage: true })}
+</link>;*/
+
+/*<button
+onClick={() => this.setState({ showSearchPage: true })}
+>Add a book */
