@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 //AQUI VOU COLOCAR TODO O QUE FOR PERTINENTE A PÁGINA DE BUSCA
 
@@ -7,12 +8,9 @@ class SearchBook extends Component {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <button
-            className="close-search"
-            onClick={() => this.setState({ showSearchPage: false })}
-          >
+          <Link className="close-search" to="/">
             Close
-          </button>
+          </Link>
           <div className="search-books-input-wrapper">
             <input
               type="text"
