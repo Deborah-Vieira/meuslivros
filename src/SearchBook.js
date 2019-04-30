@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 //AQUI VOU COLOCAR TODO O QUE FOR PERTINENTE A PÁGINA DE BUSCA
 
 class SearchBook extends Component {
-  /* state = {
+  state = {
     query: ""
   };
 
   //metodo de atualização do campo input
   updateQuery = query => {
-    this.state.query({ query: query.trim() }); //eliminando espaços em branco com o trim
-  };*/
+    this.setState({ query: query.trim() }); //eliminando espaços em branco com o trim
+  };
 
   render() {
     return (
@@ -31,6 +31,8 @@ class SearchBook extends Component {
           </div>
         </div>
         <div className="search-books-results">
+          {this.state.query}
+          {/**MOSTRA O ESTADO DA QUERY, O QUE EU DIGITO NO CAMPO INPUT */}
           <ol className="books-grid" />
         </div>
       </div>

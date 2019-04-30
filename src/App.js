@@ -13,10 +13,13 @@ class BooksApp extends React.Component {
   constructor() {
     super();
     this.state = {
-      books: []
+      books: [],
+      query: ""
       //UM ARRAY DE LIVROS
       // showSearchPage: [], //guarda a busca dos livros
     };
+    this.searchBook = this.searchBook.bind(this);
+
     //this.updateBook = this.updateBook.bind(this); //identificação de escopo, faz o this trabalhar no retorno de chamada, uso isso caso nao use na minha função o ES6 de seta a arrow function (=>) a seta.
   }
 
@@ -27,20 +30,20 @@ class BooksApp extends React.Component {
     });
   }
 
-  /* /método atualiza os livros nas prateleiras
+  /*método atualiza os livros nas prateleiras
   updateBook(book, shelf) {
     BooksAPI.update().then(livros => {
-      this.setState({});
+      this.setState({ books: livros });
     });
   }*/
 
   //método busca
-  /* searchBook(query) {
+  searchBook(query) {
     BooksAPI.search(query).then(livros => {
-      this.setState({ booksSearch: livros });
+      this.setState({ books: livros });
       //console.log("busca", livros);
     });
-}*/
+  }
 
   //3 variaveis que passam a lista de livro para os componente respectivos
   render() {
@@ -62,7 +65,7 @@ class BooksApp extends React.Component {
     let Ler = this.state.books.filter(book => book.shelf === "read");
     let QueroLer = this.state.books.filter(book => book.shelf === "wantToRead");
     return (
-      //essa div é referente a página de busca , caso eu queira a componentizar
+      //esse route renderiza a pagina de busca
       <div className="app">
         <Route path="/search" component={SearchBook} />
         {/*ESSA DIV RENDERIZA O TITULO DA PÁGINA e na 63 passo as variaveis do filter para componentes*/}
@@ -80,9 +83,9 @@ class BooksApp extends React.Component {
                   <WantToRead books={QueroLer} />
                   <Read books={Ler} />
                   {/* botão que vai para a página de busca */}
-                  <div className="open-search">
-                    <Link to="/search">Add a book</Link>
-                  </div>
+                  <Link to="/search">
+                    <div className="open-search">Add a book</div>
+                  </Link>
                 </div>
               </div>
               )}
@@ -95,12 +98,3 @@ class BooksApp extends React.Component {
 }
 
 export default BooksApp;
-//apenas para nao esquecer como estava antes
-/* 
-<link to="/search">
-  Add a book onClick= {() => this.setState({ showSearchPage: true })}
-</link>;*/
-
-/*<button
-onClick={() => this.setState({ showSearchPage: true })}
->Add a book */
