@@ -13,9 +13,8 @@ class BooksApp extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: "",
-      books: [],
-      query: "" //UM ARRAY DE LIVROS
+      books: []
+      //UM ARRAY DE LIVROS
       // showSearchPage: [], //guarda a busca dos livros
     };
     //this.updateBook = this.updateBook.bind(this); //identificação de escopo, faz o this trabalhar no retorno de chamada, uso isso caso nao use na minha função o ES6 de seta a arrow function (=>) a seta.
@@ -42,9 +41,6 @@ class BooksApp extends React.Component {
       //console.log("busca", livros);
     });
 }*/
-  updateQuery = query => {
-    this.setState({ query: query.trim() });
-  };
 
   //3 variaveis que passam a lista de livro para os componente respectivos
   render() {
@@ -68,7 +64,7 @@ class BooksApp extends React.Component {
     return (
       //essa div é referente a página de busca , caso eu queira a componentizar
       <div className="app">
-        <Route path="/search" Component={SearchBook} />
+        <Route path="/search" component={SearchBook} />
         {/*ESSA DIV RENDERIZA O TITULO DA PÁGINA e na 63 passo as variaveis do filter para componentes*/}
         <Route
           exact
@@ -83,7 +79,6 @@ class BooksApp extends React.Component {
                   <ConteudoLivro books={LendoatualmenteLivros} />
                   <WantToRead books={QueroLer} />
                   <Read books={Ler} />
-                  {/* add a rota por aqui */}
                   {/* botão que vai para a página de busca */}
                   <div className="open-search">
                     <Link to="/search">Add a book</Link>
