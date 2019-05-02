@@ -37,7 +37,7 @@ class BooksApp extends React.Component {
     });
   }*/
 
-  //método busca
+  //método troca de estante
   searchBook(query) {
     BooksAPI.search(query).then(livros => {
       this.setState({ books: livros });
@@ -67,10 +67,7 @@ class BooksApp extends React.Component {
     return (
       //esse route renderiza a pagina de busca
       <div className="app">
-        <Route
-          path="/search"
-          component={() => <SearchBook changeInput={this.searchBook} />}
-        />
+        <Route path="/search" component={SearchBook} />
         {/*ESSA DIV RENDERIZA O TITULO DA PÁGINA e na 63 passo as variaveis do filter para componentes*/}
         <Route
           exact
