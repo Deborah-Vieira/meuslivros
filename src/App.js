@@ -67,7 +67,10 @@ class BooksApp extends React.Component {
     return (
       //esse route renderiza a pagina de busca
       <div className="app">
-        <Route path="/search" component={SearchBook} />
+        <Route
+          path="/search"
+          component={() => <SearchBook changeInput={this.searchBook} />}
+        />
         {/*ESSA DIV RENDERIZA O TITULO DA PÁGINA e na 63 passo as variaveis do filter para componentes*/}
         <Route
           exact
