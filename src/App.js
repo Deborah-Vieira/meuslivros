@@ -18,7 +18,7 @@ class BooksApp extends React.Component {
       //UM ARRAY DE LIVROS
       // showSearchPage: [], //guarda a busca dos livros
     };
-    this.searchBook = this.searchBook.bind(this);
+    //this.searchBook = this.searchBook.bind(this);
 
     //this.updateBook = this.updateBook.bind(this); //identificação de escopo, faz o this trabalhar no retorno de chamada, uso isso caso nao use na minha função o ES6 de seta a arrow function (=>) a seta.
   }
@@ -37,33 +37,15 @@ class BooksApp extends React.Component {
     });
   }*/
 
-  //método troca de estante
-  searchBook(query) {
-    BooksAPI.search(query).then(livros => {
-      this.setState({ books: livros });
-      //console.log("busca", livros);
-    });
-  }
-
   //3 variaveis que passam a lista de livro para os componente respectivos
   render() {
-    //Buscando contatos segundo expressoes regulares
-    /*let MostraLivros;
-    if (this.state.query) {
-      const match = new RegExp(escapeRegExp(this.state.query), "i");
-      MostraLivros = this.props.livros.filter(livros =>
-        match.test(livros.name)
-      );
-    } else {
-      MostraLivros = this.props.livros;
-    }*/
-
     //console.log(this.state.books); //acessando o estado do componente
     let LendoatualmenteLivros = this.state.books.filter(
       book => book.shelf === "currentlyReading"
     );
     let Ler = this.state.books.filter(book => book.shelf === "read");
     let QueroLer = this.state.books.filter(book => book.shelf === "wantToRead");
+
     return (
       //esse route renderiza a pagina de busca
       <div className="app">
@@ -79,7 +61,7 @@ class BooksApp extends React.Component {
               </div>
               <div className="list-books-content">
                 <div>
-                  <ConteudoLivro books={LendoatualmenteLivros} />
+                  <ConteudoLivro books={LendoatualmenteLivros} />/
                   <WantToRead books={QueroLer} />
                   <Read books={Ler} />
                   {/* botão que vai para a página de busca */}
