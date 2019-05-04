@@ -23,7 +23,10 @@ class WantToRead extends Component {
                         backgroundImage: `url(${book.imageLinks.thumbnail})`
                       }}
                     />
-                    <BotaoEscolha />
+                    <BotaoEscolha
+                      book={book}
+                      updateBook={this.props.updateBook} //chamando o metodo de app.js
+                    />
                   </div>
                   <div className="book-title">{book.title}</div>
                   <div className="book-authors">{book.authors}</div>

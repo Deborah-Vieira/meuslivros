@@ -14,9 +14,8 @@ class BooksApp extends React.Component {
     super();
     this.state = {
       books: [],
-      query: ""
-      //UM ARRAY DE LIVROS
-      // showSearchPage: [], //guarda a busca dos livros
+      query: "",
+      shelfs: []
     };
     //this.searchBook = this.searchBook.bind(this);
 
@@ -30,12 +29,12 @@ class BooksApp extends React.Component {
     });
   }
 
-  /*método atualiza os livros nas prateleiras
+  //método atualiza os livros nas prateleiras guardando o resultado no array shelfs
   updateBook(book, shelf) {
-    BooksAPI.update().then(livros => {
-      this.setState({ books: livros });
+    BooksAPI.update().then(data => {
+      this.setState({ shelfs: data });
     });
-  }*/
+  }
 
   //3 variaveis que passam a lista de livro para os componente respectivos
   render() {
@@ -63,7 +62,7 @@ class BooksApp extends React.Component {
                 <div>
                   <ConteudoLivro books={LendoatualmenteLivros} />/
                   <WantToRead books={QueroLer} />
-                  <Read books={Ler} />
+                  <Read books={Ler} updateBook={this.updateBook} />
                   {/* botão que vai para a página de busca */}
                   <Link to="/search">
                     <div className="open-search">Add a book</div>

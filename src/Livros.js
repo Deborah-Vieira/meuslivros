@@ -10,8 +10,6 @@ class Livros extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {this.props.books.map(book => (
-              book //acessando o array do app.js e filtrando
-            ) => (
               <li key={book.id}>
                 <div className="book">
                   <div className="book-top">

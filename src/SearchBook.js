@@ -34,6 +34,7 @@ class SearchBook extends Component {
 
   render() {
     let listaLivros = this.state.resultadoBuscaLivros;
+    console.log(listaLivros);
 
     return (
       <div className="search-books">
@@ -42,29 +43,19 @@ class SearchBook extends Component {
             Close
           </Link>
           <div className="search-books-input-wrapper">
-            <DebounceInput
-              minLength={2}
-              debounceTimeout={300}
+            <input
               type="text"
-              onChange={event => this.updateQuery(event.target.value)}
               placeholder="Search by title or author"
-              value={this.setState.query} //quero que o valor seja sempre o do estado a query
+              value={this.state.query} //quero que o valor seja sempre o do estado a query
+              onChange={event => this.updateQuery(event.target.value)}
             />
           </div>
         </div>
         <div className="search-books-results">
-          <Livros books={listaLivros} />
-          <ol className="books-grid" />
+          {listaLivros != null ? <Livros books={listaLivros} /> : null}
         </div>
       </div>
     );
   }
 }
 export default SearchBook;
-
-/**<input
-              type="text"
-              placeholder="Search by title or author"
-              value={this.setState.query} //quero que o valor seja sempre o do estado a query
-              onChange={event => this.updateQuery(event.target.value)}
-            /> */
