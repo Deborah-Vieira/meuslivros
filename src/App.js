@@ -13,13 +13,12 @@ class BooksApp extends React.Component {
   constructor() {
     super();
     this.state = {
-      books: [],
-      query: "",
-      shelfs: []
+      books: [], //os livros estão aqui no estado da minha aplicação
+      query: ""
     };
     //this.searchBook = this.searchBook.bind(this);
 
-    //this.updateBook = this.updateBook.bind(this); //identificação de escopo, faz o this trabalhar no retorno de chamada, uso isso caso nao use na minha função o ES6 de seta a arrow function (=>) a seta.
+    this.updateBook = this.updateBook.bind(this); //identificação de escopo, faz o this trabalhar no retorno de chamada, uso isso caso nao use na minha função o ES6 de seta a arrow function (=>) a seta.
   }
 
   //aqui puxo todos os dados da lista de livros da api, antes que a pagina carregue
@@ -31,9 +30,20 @@ class BooksApp extends React.Component {
 
   //método atualiza os livros nas prateleiras guardando o resultado no array shelfs
   updateBook(book, shelf) {
-    BooksAPI.update().then(data => {
+    console.log("teste", book, shelf);
+    this.setState(prevState => ({
+      books: prevState.books.filter(shelf => shelf.id != book.id)
+    }));
+
+    /*Tudo o que eu fiz no estado anterior acima foi:  quero que o proximo estado se baseie no estado atual
+    1  na linha 35 passo o array de livros e faço um filtro eliminando da tela o que for diferente da estante.
+    2 o filter nao retorna uma array, ele faz o que eu quero nesse caso o que for diferente vai ser eliminado os ids de estante e livro, e retorna uma nova lista atualizada
+  
+    * */
+
+    /*BooksAPI.update().then(data => {
       this.setState({ shelfs: data });
-    });
+    });*/
   }
 
   //3 variaveis que passam a lista de livro para os componente respectivos
@@ -60,8 +70,12 @@ class BooksApp extends React.Component {
               </div>
               <div className="list-books-content">
                 <div>
-                  <ConteudoLivro books={LendoatualmenteLivros} />/
-                  <WantToRead books={QueroLer} />
+                  <ConteudoLivro
+                    books={LendoatualmenteLivros}
+                    updateBook={this.updateBook}
+                  />
+                  /
+                  <WantToRead books={QueroLer} updateBook={this.updateBook} />
                   <Read books={Ler} updateBook={this.updateBook} />
                   {/* botão que vai para a página de busca */}
                   <Link to="/search">
