@@ -15,9 +15,11 @@ class BotaoEscolha extends Component {
     const { book, updateBook } = this.props; //desconstrução
     return (
       <div className="book-shelf-changer">
-        <select onChange={e => updateBook(book, e.target.value)}>
+        <select
+          // value={book.shelf}
+          onChange={e => updateBook(book, e.target.value)}
+        >
           <option value="move" disabled>
-            {" "}
             Move to
           </option>
           <option value="currentlyReading">Currently Reading</option>
@@ -31,3 +33,4 @@ class BotaoEscolha extends Component {
   }
 }
 export default BotaoEscolha;
+// value={book.shelf} //isso  faz a pratileira selecionar a atual na seta

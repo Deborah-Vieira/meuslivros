@@ -30,21 +30,32 @@ class BooksApp extends React.Component {
 
   //método atualiza os livros nas prateleiras guardando o resultado no array shelfs
   updateBook(book, shelf) {
-    console.log("teste", book, shelf);
-    this.setState(prevState => ({
-      books: prevState.books.filter(shelf => shelf.id != book.id)
-    }));
+    BooksAPI.update(book, shelf).then(resp => {
+      book.shelf = shelf;
+      const livrosFiltrados = this.state.books.filter(
+        item => item.id !== book.id
+      );
+      this.setState({
+        books: [...livrosFiltrados, book]
+      });
+    });
+  }
 
-    /*Tudo o que eu fiz no estado anterior acima foi:  quero que o proximo estado se baseie no estado atual
+  //na linha 38 : criamos uma  nova array, passamos os items da array livrosFiltrados e também o book com a nova prateleira setada
+  // livrosFiltrados é a array sem o livro antigo
+  //console.log("teste", book, shelf);
+
+  /** O QUE FALTA É : RENDERIZAR OS LIVROS PASSADOS PARA A ESTANTE ATUAL */
+
+  /*Tudo o que eu fiz no estado anterior acima foi:  quero que o proximo estado se baseie no estado atual
     1  na linha 35 passo o array de livros e faço um filtro eliminando da tela o que for diferente da estante.
     2 o filter nao retorna uma array, ele faz o que eu quero nesse caso o que for diferente vai ser eliminado os ids de estante e livro, e retorna uma nova lista atualizada
   
     * */
 
-    /*BooksAPI.update().then(data => {
+  /*BooksAPI.update().then(data => {
       this.setState({ shelfs: data });
     });*/
-  }
 
   //3 variaveis que passam a lista de livro para os componente respectivos
   render() {
@@ -74,7 +85,7 @@ class BooksApp extends React.Component {
                     books={LendoatualmenteLivros}
                     updateBook={this.updateBook}
                   />
-                  /
+
                   <WantToRead books={QueroLer} updateBook={this.updateBook} />
                   <Read books={Ler} updateBook={this.updateBook} />
                   {/* botão que vai para a página de busca */}

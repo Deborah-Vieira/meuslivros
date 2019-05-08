@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { search as buscaLivros } from "./BooksAPI";
 import { Link } from "react-router-dom";
 import Livros from "./Livros";
-import { DebounceInput } from "react-debounce-input";
-import escapeRegExp from "escape-string-regexp";
-import sortBy from "sort-by";
+//import { DebounceInput } from "react-debounce-input";
 
 //AQUI VOU COLOCAR TODO O QUE FOR PERTINENTE A PÁGINA DE BUSCA
 
@@ -13,14 +11,6 @@ class SearchBook extends Component {
     query: "",
     resultadoBuscaLivros: []
   };
-
-  /*método troca de estante
-  searchBook(query) {
-    BooksAPI.search(query).then(livros => {
-      this.setState({ books: livros });
-      //console.log("busca", livros);
-    });
-  }*/
 
   //metodo de atualização do campo input
   //passando um paramentro query
