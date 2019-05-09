@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import BotaoEscolha from "./BotaoEscolha/botaoEscolha";
+import BotaoEscolha from "../BotaoEscolha/botaoEscolha";
 
-//renderizados na página de busca
-class Livros extends Component {
+class WantToRead extends Component {
   render() {
+    console.log(this.props.books);
     return (
       <div className="bookshelf">
+        <h2 className="bookshelf-title">Want to Read</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
             {this.props.books.map(book => (
@@ -36,5 +37,4 @@ class Livros extends Component {
     );
   }
 }
-
-export default Livros;
+export default WantToRead;

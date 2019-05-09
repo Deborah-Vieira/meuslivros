@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import BotaoEscolha from "./BotaoEscolha/botaoEscolha";
+import BotaoEscolha from "../BotaoEscolha/botaoEscolha";
 
-//renderizados na página de busca
-class Livros extends Component {
+class Read extends Component {
   render() {
     return (
       <div className="bookshelf">
+        <h2 className="bookshelf-title">Read</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
             {this.props.books.map(book => (
@@ -16,7 +16,7 @@ class Livros extends Component {
                       className="book-cover"
                       style={{
                         width: 128,
-                        height: 193,
+                        height: 192,
                         backgroundImage: `url(${book.imageLinks.thumbnail})`
                       }}
                     />
@@ -37,4 +37,4 @@ class Livros extends Component {
   }
 }
 
-export default Livros;
+export default Read;

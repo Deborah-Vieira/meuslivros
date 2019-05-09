@@ -1,15 +1,19 @@
 import React, { Component } from "react";
-import BotaoEscolha from "./BotaoEscolha/botaoEscolha";
+import BotaoEscolha from "../BotaoEscolha/botaoEscolha";
 
-//renderizados na página de busca
-class Livros extends Component {
+//LENDO ATUALMENTE
+
+class ConteudoLivro extends Component {
   render() {
+    //console.log(this.props.books);
     return (
       <div className="bookshelf">
+        <h2 className="bookshelf-title">Currently Reading</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
             {this.props.books.map(book => (
               <li key={book.id}>
+                {""}
                 <div className="book">
                   <div className="book-top">
                     <div
@@ -37,4 +41,4 @@ class Livros extends Component {
   }
 }
 
-export default Livros;
+export default ConteudoLivro;
