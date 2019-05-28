@@ -1,7 +1,8 @@
 # MyReads Project
 Para execução do projeto: 
 
-1) Clone ou faça download do projeto em sua máquina. 2) Extraia os arquivos para onde preferir
+1) Clone ou faça download do projeto em sua máquina.
+2) Extraia os arquivos para onde preferir
 3) Abra seu console e navegue até a pasta principal do seu projeto. 
 4) Dentro do diretório execute o seguinte comando : npm start ou yarn start(o que preferir)
 5) Acesse : http://localhost:3000/ em seu navegador para ver o projeto executando
