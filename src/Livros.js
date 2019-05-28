@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import BotaoEscolha from "./BotaoEscolha/botaoEscolha";
 
-//renderizados na página de busca
 class Livros extends Component {
   render() {
+    //console.log(this.props.books);
+    /*const { imageLinks, shelf } = this.props.book;*
+    const smallThumbnail = imageLinks ? imageLinks.smallThumbnail : "";*/
     return (
       <div className="bookshelf">
         <div className="bookshelf-books">
@@ -20,6 +22,9 @@ class Livros extends Component {
                         backgroundImage: `url(${book.imageLinks.thumbnail})`
                       }}
                     />
+                    {book.imageLinks !== undefined && (
+                      <img src={book.imageLinks.thumbnail} alt={book.title} />
+                    )}
                     <BotaoEscolha
                       book={book}
                       updateBook={this.props.updateBook}
