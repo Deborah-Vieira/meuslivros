@@ -41,21 +41,6 @@ class BooksApp extends React.Component {
     });
   }
 
-  //na linha 38 : criamos uma  nova array, passamos os items da array livrosFiltrados e também o book com a nova prateleira setada
-  // livrosFiltrados é a array sem o livro antigo
-  //console.log("teste", book, shelf);
-
-  /** O QUE FALTA É : RENDERIZAR OS LIVROS PASSADOS PARA A ESTANTE ATUAL */
-
-  /*Tudo o que eu fiz no estado anterior acima foi:  quero que o proximo estado se baseie no estado atual
-    1  na linha 35 passo o array de livros e faço um filtro eliminando da tela o que for diferente da estante.
-    2 o filter nao retorna uma array, ele faz o que eu quero nesse caso o que for diferente vai ser eliminado os ids de estante e livro, e retorna uma nova lista atualizada
-  
-    * */
-
-  /*BooksAPI.update().then(data => {
-      this.setState({ shelfs: data });
-    });*/
 
   //3 variaveis que passam a lista de livro para os componente respectivos
   render() {
@@ -65,13 +50,6 @@ class BooksApp extends React.Component {
     const read = books.filter(b => b.shelf === "read");
     const wantToRead = books.filter(b => b.shelf === "wantToRead");
 
-    /*
-    let LendoatualmenteLivros = this.state.books.filter(
-      book => book.shelf === "currentlyReading"
-    );
-    let Ler = this.state.books.filter(book => book.shelf === "read");
-    let QueroLer = this.state.books.filter(book => book.shelf === "wantToRead");*/
-
     return (
       //esse route renderiza a pagina de busca
       <div className="app">
@@ -79,7 +57,7 @@ class BooksApp extends React.Component {
           path="/search"
           render={() => <SearchBook updateBook={this.updateBook} />}
         />
-        {/*ESSA DIV RENDERIZA O TITULO DA PÁGINA e na 63 passo as variaveis do filter para componentes*/}
+
         <Route
           exact
           path="/"

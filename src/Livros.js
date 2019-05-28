@@ -3,38 +3,37 @@ import BotaoEscolha from "./BotaoEscolha/botaoEscolha";
 
 class Livros extends Component {
   render() {
-    //console.log(this.props.books);
-    /*const { imageLinks, shelf } = this.props.book;*
-    const smallThumbnail = imageLinks ? imageLinks.smallThumbnail : "";*/
+
     return (
       <div className="bookshelf">
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {this.props.books.map(book => (
-              <li key={book.id}>
-                <div className="book">
-                  <div className="book-top">
-                    <div
-                      className="book-cover"
-                      style={{
-                        width: 128,
-                        height: 193,
-                        backgroundImage: `url(${book.imageLinks.thumbnail})`
-                      }}
-                    />
-                    {book.imageLinks !== undefined && (
-                      <img src={book.imageLinks.thumbnail} alt={book.title} />
-                    )}
-                    <BotaoEscolha
-                      book={book}
-                      updateBook={this.props.updateBook}
-                    />
+            {this.props.books.length > 0 &&
+              this.props.books.map(book => (
+                <li key={book.id}>
+                  <div className="book">
+                    <div className="book-top">
+                      <div
+                        className="book-cover"
+                        style={{
+                          width: 128,
+                          height: 193,
+                          backgroundImage:
+                            book.imageLinks &&
+                            `url(${book.imageLinks.thumbnail})`
+                        }}
+                      />
+
+                      <BotaoEscolha
+                        book={book}
+                        updateBook={this.props.updateBook}
+                      />
+                    </div>
+                    <div className="book-title">{book.title}</div>
+                    <div className="book-authors">{book.authors}</div>
                   </div>
-                  <div className="book-title">{book.title}</div>
-                  <div className="book-authors">{book.authors}</div>
-                </div>
-              </li>
-            ))}
+                </li>
+              ))}
           </ol>
         </div>
       </div>
