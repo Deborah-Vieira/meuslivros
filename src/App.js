@@ -55,7 +55,8 @@ class BooksApp extends React.Component {
       <div className="app">
         <Route
           path="/search"
-          render={() => <SearchBook updateBook={this.updateBook} />}
+          render={() =>
+            <SearchBook updateBook={this.updateBook} />}
         />
 
         <Route
@@ -64,7 +65,7 @@ class BooksApp extends React.Component {
           render={() => (
             <div className="list-books">
               <div className="list-books-title">
-                <h1>Meuslivros</h1>
+                <h1>Meus livros</h1>
               </div>
               <div className="list-books-content">
                 <div>

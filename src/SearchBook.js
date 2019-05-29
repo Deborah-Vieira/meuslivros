@@ -18,12 +18,18 @@ class SearchBook extends Component {
     const texto = query.trim();
     this.setState({ query: texto });
     buscaLivros(texto).then(
-      res => this.setState({ resultadoBuscaLivros: res })
+      res => this.setState({ resultadoBuscaLivros: res }),
+      /* resultadoBuscaLivros.filter(Livro => Livro.id == Livro.id),
+       resultadoBuscaLivros.shelf = LivrosFiltrados ? LivrosFiltrados.shelf : 'none'*/
     ); //mostra o resultado dos livros quando digito no console
   };
 
+
   render() {
+
     let listaLivros = this.state.resultadoBuscaLivros;
+    const LivrosFiltrados = listaLivros.filter(Livro => Livro.id == Livro.id)
+    listaLivros.shelf = LivrosFiltrados ? LivrosFiltrados.shelf : 'none'
     console.log(listaLivros);
 
     return (
