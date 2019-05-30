@@ -22,3 +22,7 @@ class BotaoEscolha extends Component {
   }
 }
 export default BotaoEscolha;
+
+/**
+ *  <select value={book.shelf != null ? book.shelf : "none"} onChange={e => updateBook(book, e.target.value)}>
+ */

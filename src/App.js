@@ -22,7 +22,6 @@ class BooksApp extends React.Component {
   }
 
   //aqui puxo todos os dados da lista de livros da api, antes que a pagina carregue
-
   async componentDidMount() {
     const books = await BooksAPI.getAll();
     this.setState({ books });
@@ -33,7 +32,8 @@ class BooksApp extends React.Component {
     BooksAPI.update(book, shelf).then(resp => {
       book.shelf = shelf;
       const livrosFiltrados = this.state.books.filter(
-        item => item.id !== book.id
+        item => item.id !== book
+          .id
       );
       this.setState({
         books: [...livrosFiltrados, book]
